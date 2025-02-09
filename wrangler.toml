@@ -1,11 +1,5 @@
-name = "portafolio-api"
+name = "portafolio-apiv1"
 workers_dev = false
-compatibility_flags = [ "nodejs_compat" ]
-compatibility_date = "2024-09-23"
-account_id = "53a6f662dfdab5395a90a128cb2e1f93"
-
-# Nombre de tu Worker
-name = "portafolio-api"
 
 # Fecha de compatibilidad (usualmente la fecha actual)
 compatibility_date = "2025-02-09"
