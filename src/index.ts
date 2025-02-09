@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
     res.send('¡Hola, mundo test!');
 });
 
-// app.use('/api/v1/projects', projectRoutes);
+app.use('/api/v1/projects', projectRoutes);
 
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en el puerto ${PORT}`);
