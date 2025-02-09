@@ -30,4 +30,30 @@ export const createProject = async (project?: Project): Promise<PostgrestError |
     }
 
     return error;
-}; 
+};
+
+export const updateProject = async (id: string, project: Project): Promise<PostgrestError | null> => {
+    const { error } = await supabase
+        .from('projects')
+        .update(project)
+        .eq('id', id);
+
+    if (error) {
+        throw new Error(error.message);
+    }
+
+    return error;
+};
+
+export const deleteProject = async (id: string): Promise<PostgrestError | null> => {
+    const { error } = await supabase
+        .from('projects')
+        .delete()
+        .eq('id', id);
+
+    if (error) {
+        throw new Error(error.message);
+    }
+
+    return error;
+};
