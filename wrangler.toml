@@ -1,14 +1,10 @@
 name = "portafolio-apiv1"
-workers_dev = false
-
-# Fecha de compatibilidad (usualmente la fecha actual)
 compatibility_date = "2025-02-09"
-
-# ID de tu cuenta de Cloudflare
 account_id = "53a6f662dfdab5395a90a128cb2e1f93"
-
-# Indica si deseas desplegar en el subdominio workers.dev
-workers_dev = true
-
-# Ruta de tu archivo principal
+workers_dev = true  # O false, según tu preferencia
 main = "src/index.js"
+
+# Si workers_dev = false, define las rutas de tu Worker
+# [[routes]]
+# pattern = "tu-dominio.com/*"
+# zone_id = "tu_zone_id"
