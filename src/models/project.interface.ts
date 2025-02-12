@@ -4,5 +4,4 @@ export interface Project {
     url?: string;
     description?: string;
     technologies?: string[];
-    create_date: Date;
 } 

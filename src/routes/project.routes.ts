@@ -4,23 +4,39 @@ import { getProjects, createProject, updateProject, deleteProject } from '../con
 const router = Router();
 
 router.get('/', async (req, res) => {
-    const projects = await getProjects();
-    res.json(projects);
+    try {
+        const projects = await getProjects();
+        res.json(projects);
+    } catch (error: Error | any) {
+        res.status(500).json({ error: 'Error fetching projects', details: error?.message });
+    }
 });
 
 router.post('/', async (req, res) => {
-    const newProject = await createProject(req.body);
-    res.status(201).json(newProject);
+    try {
+        const newProject = await createProject(req.body);
+        res.status(201).json(newProject);
+    } catch (error: Error | any) {
+        res.status(500).json({ error: 'Error creating project', details: error?.message });
+    }
 });
 
 router.put('/:id', async (req, res) => {
-    const updatedProject = await updateProject(req.params.id, req.body);
-    res.json(updatedProject);
+    try {
+        const updatedProject = await updateProject(req.params.id, req.body);
+        res.json(updatedProject);
+    } catch (error: Error | any) {
+        res.status(500).json({ error: 'Error updating project', details: error?.message });
+    }
 });
 
 router.delete('/:id', async (req, res) => {
-    await deleteProject(req.params.id);
-    res.status(204).send();
+    try {
+        await deleteProject(req.params.id);
+        res.status(204).send();
+    } catch (error: Error | any) {
+        res.status(500).json({ error: 'Error deleting project', details: error?.message });
+    }
 });
 
-export default router; 
+export default router;
