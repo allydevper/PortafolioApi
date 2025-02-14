@@ -20,20 +20,22 @@ export const getProjects = async (): Promise<Project[]> => {
     return data as Project[];
 };
 
-export const createProject = async (project?: Project): Promise<PostgrestError | null> => {
-    const { error } = await supabase
+export const createProject = async (project?: Project): Promise<Project> => {
+    const { data, error } = await supabase
         .from('projects')
-        .insert([project]);
+        .insert([project])
+        .select('*')
+        .single();
 
     if (error) {
         throw new Error(error.message);
     }
 
-    return error;
+    return data as Project;
 };
 
 export const updateProject = async (id: string, project: Project): Promise<PostgrestError | null> => {
-    const { error } = await supabase
+    const { data, error } = await supabase
         .from('projects')
         .update(project)
         .eq('id', id);
@@ -42,11 +44,11 @@ export const updateProject = async (id: string, project: Project): Promise<Postg
         throw new Error(error.message);
     }
 
-    return error;
+    return data;
 };
 
 export const deleteProject = async (id: string): Promise<PostgrestError | null> => {
-    const { error } = await supabase
+    const { data, error } = await supabase
         .from('projects')
         .delete()
         .eq('id', id);
@@ -55,5 +57,5 @@ export const deleteProject = async (id: string): Promise<PostgrestError | null> 
         throw new Error(error.message);
     }
 
-    return error;
+    return data;
 };
