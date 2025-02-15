@@ -1,11 +1,20 @@
 import { Router } from 'express';
-import { getProjects, createProject, updateProject, deleteProject } from '../controllers/project.controller';
+import { getProjects, createProject, updateProject, deleteProject, getLastestsProjects } from '../controllers/project.controller';
 
 const router = Router();
 
 router.get('/', async (req, res) => {
     try {
         const projects = await getProjects();
+        res.json(projects);
+    } catch (error: Error | any) {
+        res.status(500).json({ error: 'Error fetching projects', details: error?.message });
+    }
+});
+
+router.get('/lastests', async (req, res) => {
+    try {
+        const projects = await getLastestsProjects();
         res.json(projects);
     } catch (error: Error | any) {
         res.status(500).json({ error: 'Error fetching projects', details: error?.message });

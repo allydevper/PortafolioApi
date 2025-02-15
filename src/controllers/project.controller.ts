@@ -20,6 +20,21 @@ export const getProjects = async (): Promise<Project[]> => {
     return data as Project[];
 };
 
+export const getLastestsProjects = async (): Promise<Project[]> => {
+    const { data, error } = await supabase
+        .from('projects')
+        .select('*')
+        .order('create_date', { ascending: false })
+        .limit(4);
+
+    if (error) {
+        throw new Error(error.message);
+    }
+
+    return data as Project[];
+};
+
+
 export const createProject = async (project?: Project): Promise<Project> => {
     const { data, error } = await supabase
         .from('projects')
