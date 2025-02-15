@@ -17,7 +17,7 @@ router.get('/lastests', async (req, res) => {
         const projects = await getLastestsProjects();
         res.json(projects);
     } catch (error: Error | any) {
-        res.status(500).json({ error: 'Error fetching projects', details: error?.message });
+        res.status(500).json({ error: 'Error fetching lastests projects', details: error?.message });
     }
 });
 
