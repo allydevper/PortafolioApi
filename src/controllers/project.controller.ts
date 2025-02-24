@@ -7,7 +7,6 @@ dotenv.config();
 const supabaseUrl = process.env.SUPABASE_URL!;
 const supabaseAnonKey = process.env.SUPABASE_KEY!;
 const supabase = createClient(supabaseUrl, supabaseAnonKey);
-
 export const getProjects = async (): Promise<Project[]> => {
     const { data, error } = await supabase
         .from('projects')
@@ -18,6 +17,23 @@ export const getProjects = async (): Promise<Project[]> => {
     }
 
     return data as Project[];
+};
+
+export const getProjectsByPage = async (page: number = 1, pageSize: number = 10): Promise<{ data: Project[]; count: number; error?: any }> => {
+    const from = (page - 1) * pageSize;
+    const to = from + pageSize - 1;
+
+    const { count, data, error } = await supabase
+        .from('projects')
+        .select('*', { count: 'exact' })
+        .order('create_date', { ascending: false })
+        .range(from, to);
+
+    if (error) {
+        throw new Error(error.message);
+    }
+
+    return { data: data as Project[], count: count ?? 0, error };
 };
 
 export const getLastestsProjects = async (): Promise<Project[]> => {

@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getProjects, createProject, updateProject, deleteProject, getLastestsProjects } from '../controllers/project.controller';
+import { getProjects, createProject, updateProject, deleteProject, getLastestsProjects, getProjectsByPage } from '../controllers/project.controller';
 
 const router = Router();
 
@@ -9,6 +9,16 @@ router.get('/', async (req, res) => {
         res.json(projects);
     } catch (error: Error | any) {
         res.status(500).json({ error: 'Error fetching projects', details: error?.message });
+    }
+});
+
+router.get('/page/:page/:pageSize', async (req, res) => {
+    const { page, pageSize } = req.params;
+    try {
+        const projects = await getProjectsByPage(Number(page), Number(pageSize));
+        res.json(projects);
+    } catch (error: Error | any) {
+        res.status(500).json({ error: 'Error fetching projects by page', details: error?.message });
     }
 });
 
