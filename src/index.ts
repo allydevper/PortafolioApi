@@ -8,7 +8,7 @@ dotenv.config();
 const app = express();
 
 app.use(cors({
-  origin: ['http://localhost:4321', 'https://portafolio-alamadev.up.railway.app'],
+  origin: ['https://www.wilmeralama.com', 'https://portafolio-alamadev.up.railway.app'],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
